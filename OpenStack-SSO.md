@@ -8,7 +8,7 @@ Tôi thực hiện tách node database ra thành node riêng
 
 Sau khi cài đặt hoàn thành OpenStack, thì việc xác thực vẫn chỉ sử dụng với user được tạo trên local bằng keystone.
 
-Để sử dụng được Federated thì bắt đầu hiểu về mô hình xác thực SSO (Single Sign-On). Bạn có thể đọc tại phần cơ bản về SSO. Ở đây tôi sẽ hướng dẫn quá trình 
+Để sử dụng được Federated thì cần hiểu về mô hình xác thực SSO (Single Sign-On). Bạn có thể đọc tại phần cơ bản về SSO. Ở đây tôi sẽ hướng dẫn quá trình 
 cài đặt và cấu hình
 
 # Cài đặt
