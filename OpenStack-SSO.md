@@ -938,7 +938,7 @@ Listen 35357
 chown -R _shibd:_shibd  /etc/shibboleth/* && chown -R _shibd:_shibd  /etc/shibboleth/
 ```
 
-- Gen key cho shibboleth module
+- Tạo new keypair 10 năm cho shibboleth. key được tạo ra sẽ lưu ở `/etc/shibboleth/sp-key.pem`
 ```sh
 shib-keygen -y 10
 ```
@@ -947,11 +947,6 @@ shib-keygen -y 10
 ```sh
 service shibd restart
 service apache2 restart
-```
-
-- Enable module shibboleth
-```sh
-a2enmod shib2
 ```
 
 Tiến hành khởi tạo groups, projects, mappings,... cho federate
@@ -990,15 +985,12 @@ openstack project create --domain Default federation
 # add admin and member roles to project federation
 openstack role create _member_
 
-# có thể role tên là admin đã được tạo trong quá trình cài đặt OpenStack nên chạy lệnh dưới bị lỗi cũng ko sao
-openstack role create admin
-
 openstack role add --project federation --group federated_users _member_
 openstack role add --project federation --group federated_admins _member_
 openstack role add --project federation --group federated_admins admin
 ```
 
-- Tạo tập tin mapping có tên `default-federation-mapping.json` để ánh xạ người dùng của federate vào người dùng trên local
+- Tạo tập tin mapping có tên `default-federation-mapping.json` để ánh xạ người dùng từ xa vào người dùng trên local
 ```sh
 [
 		{
@@ -1083,7 +1075,28 @@ Tới đây, các bước cài đặt và cấu hình đã thực hiện thành 
 
 ![sso4](/images/sso4.png)
 
+# Debug
+
+Trong quá trình cài đặt và thử nghiệm, tôi gặp khá nhiều lỗi. ở đây tôi tổng hợp lại và cách tôi khắc phục
+
+## bug 1
+
+![bug_sso1](/images/bug_sso1.png)
+
+Khi gặp lỗi này, tôi restart lại module shib trên note controller thì thấy khắc phục được
+
+## bug2
+
+![bug_sso2](/images/bug_sso2.png)
+
+Lỗi này xuất hiện khi tôi stop module shib. Khởi động lại là hết.
+
+## bug3
+
+Còn một số lỗi khác nhưng quên chưa chụp lại hình. liên quan tới phần cấu hình sai.
+
+
 # Tham khảo
 
 - [https://xuctarine.blogspot.com/2016/02/keystone-service-provider-with.html](https://xuctarine.blogspot.com/2016/02/keystone-service-provider-with.html)
-
+- [https://docs.openstack.org/developer/keystone/federation/federated_identity.html](https://docs.openstack.org/developer/keystone/federation/federated_identity.html)
