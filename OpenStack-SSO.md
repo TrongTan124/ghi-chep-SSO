@@ -1083,7 +1083,10 @@ Trong quá trình cài đặt và thử nghiệm, tôi gặp khá nhiều lỗi.
 
 ![bug_sso1](/images/bug_sso1.png)
 
-Khi gặp lỗi này, tôi restart lại module shib trên note controller thì thấy khắc phục được
+Khi gặp lỗi này, tôi restart lại module shib trên note controller thì thấy khắc phục được.
+```sh
+# /etc/init.d/shibd restart
+```
 
 ## bug2
 
